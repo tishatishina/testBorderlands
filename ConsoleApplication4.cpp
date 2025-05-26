@@ -1,7 +1,7 @@
 ﻿#include <iostream>
 #include <string>
 #include <windows.h>
-
+#include <vector>
     using namespace std;
 
     enum { SADNESS, JOY, FEAR, CALM, ANGER, POWER };
@@ -10,7 +10,56 @@
         string name;
         int effect[3][6]; // 3 реплики, 6 эмоций
     };
+    struct location_ {
+        string name;
+        vector<int> portal;
 
-    // Названия эмоций и миров
-  
+
+    };
+
+    location_ room[3];
+    
+    void InitGame() {
+
+        room[0].name = "room 1";
+        room[0].portal.push_back(1);
+        room[0].portal.push_back(2);
+
+        room[1].name = "room 2";
+        room[1].portal.push_back(0);
+
+    }
+
+
+
+    int main(){
+      
+        int current_loc = 0;
+
+        InitGame();
+
+        string x;
+
+     
+      
+        while (true) {
+
+            cout << "go\n";
+            cin >> x;
+
+            if (x == "go") {
+
+                for (int i = 0; i < room[current_loc].portal.size(); i++) {
+                    cout << room[current_loc].portal[i] << endl;
+                }
+
+                int dir;
+
+                cin >> dir;
+
+                current_loc = dir;
+                cout << room[current_loc].name << endl;
+
+            }
+        }
     }
