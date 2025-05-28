@@ -3,13 +3,6 @@
 #include <windows.h>
 #include <vector>
     using namespace std;
-
-    enum { SADNESS, JOY, FEAR, CALM, ANGER, POWER };
-
-    struct Character {
-        string name;
-        int effect[3][6]; // 3 реплики, 6 эмоций
-    };
     struct location_ {
         string name;
         vector<int> portal;
@@ -17,7 +10,7 @@
 
     };
 
-    location_ room[3];
+    location_ room[4];
     
     void InitGame() {
 
@@ -27,6 +20,11 @@
 
         room[1].name = "room 2";
         room[1].portal.push_back(0);
+        room[1].portal.push_back(3);
+
+        room[3].name = "room 3";
+        room[3].portal.push_back(0);
+        room[3].portal.push_back(1);
 
     }
 
