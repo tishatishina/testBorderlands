@@ -2,62 +2,162 @@
 #include <string>
 #include <windows.h>
 #include <vector>
+
+
+
     using namespace std;
+
+  
+
+    struct player_ {
+
+        int current_loc = 0;
+
+        int emotion[3]{};
+
+    };
+
+
+    struct portal_ {
+
+        string name;
+        int target;
+        bool activ;
+    };
+
     struct location_ {
         string name;
-        vector<int> portal;
+        vector<portal_> portal;
 
 
     };
 
     location_ room[4];
-    
+    player_ user;
+
     void InitGame() {
 
-        room[0].name = "room 1";
-        room[0].portal.push_back(1);
-        room[0].portal.push_back(2);
+        user.emotion[0] = {15};
+        user.emotion[1] = { 5 };
+        user.emotion[2] = { 0 };
 
-        room[1].name = "room 2";
-        room[1].portal.push_back(0);
-        room[1].portal.push_back(3);
 
-        room[3].name = "room 3";
-        room[3].portal.push_back(0);
-        room[3].portal.push_back(1);
+        room[0].name = "calmness";
+        room[0].portal.push_back({"blue", 1, true});
+        room[0].portal.push_back({ "red", 2, false });
+        room[0].portal.push_back({ "yellow", 3, true });
+
+        room[1].name = "sadness";
+        room[1].portal.push_back({"green", 0, true });
+        room[1].portal.push_back({ "red", 2, true });
+        room[1].portal.push_back({ "yellow", 3, true });
+
+        room[2].name = "rage";
+        room[2].portal.push_back({ "green", 0, true });
+        room[2].portal.push_back({ "blue", 1, true });
+        room[2].portal.push_back({ "yellow", 3, true });
+
+        room[3].name = "power";
+        room[3].portal.push_back({ "green", 0 });
+        room[3].portal.push_back({ "blue", 1 });
+        room[3].portal.push_back({ "red", 2 });
+
+    }
+
+    void scan_emotion() {
+
+
+        for (int i = 0; i < 3; i++) {
+
+            switch (i)
+            {
+
+            case 0: {
+
+                if (user.emotion[i] >= 100 || user.emotion[i] <=0) {
+
+                    room[user.current_loc].portal[]
+
+
+                }
+                break;
+            }
+
+            default:
+                break;
+            }
+        }
+
 
     }
 
 
-
     int main(){
       
-        int current_loc = 0;
 
         InitGame();
 
-        string x;
+        string chouse;
 
      
       
         while (true) {
 
-            cout << "go\n";
-            cin >> x;
+            scan_emotion();
 
-            if (x == "go") {
+            cout << "You in world :\t" << room[user.current_loc].name << endl;
 
-                for (int i = 0; i < room[current_loc].portal.size(); i++) {
-                    cout << room[current_loc].portal[i] << endl;
+
+            //cout << "go\n";
+            cin >> chouse;
+
+            if (chouse == "go") {
+
+                for (int i = 0; i < room[user.current_loc].portal.size(); i++) {
+
+                    auto p = room[user.current_loc].portal[i];
+                    cout << p.name <<(p.activ ? " activ\n" : " NO activ\n") << endl;
+
                 }
 
-                int dir;
+                
 
-                cin >> dir;
+                cin >> chouse;
 
-                current_loc = dir;
-                cout << room[current_loc].name << endl;
+                for (int i = 0; i < room[user.current_loc].portal.size(); i++) {
+                    auto p = room[user.current_loc].portal[i];
+
+                    if (p.activ) {
+
+                        if (chouse == p.name) {
+
+                            user.current_loc = room[user.current_loc].portal[i].target;
+
+                        }
+                        else {
+                            cout << "NO NAME ERROR\n";
+                            break;
+                        }
+
+                    }
+                    else {
+
+                        cout << "You can't go. ERROR\n";
+
+                    }
+
+                }
+
+                cout << room[user.current_loc].name << endl;
 
             }
+
+            if (chouse == "t") {
+
+                user.emotion[0] = 100;
+
+
+            }
+
         }
     }
