@@ -37,14 +37,14 @@
 
     void InitGame() {
 
-        user.emotion[0] = {15};
-        user.emotion[1] = { 5 };
-        user.emotion[2] = { 0 };
+        user.emotion[0] = {15};     // грусть
+        user.emotion[1] = { 5 };    // злость
+        user.emotion[2] = { 10 };    // сила
 
 
         room[0].name = "calmness";
         room[0].portal.push_back({"blue", 1, true});
-        room[0].portal.push_back({ "red", 2, false });
+        room[0].portal.push_back({ "red", 2, true });
         room[0].portal.push_back({ "yellow", 3, true });
 
         room[1].name = "sadness";
@@ -58,9 +58,9 @@
         room[2].portal.push_back({ "yellow", 3, true });
 
         room[3].name = "power";
-        room[3].portal.push_back({ "green", 0 });
-        room[3].portal.push_back({ "blue", 1 });
-        room[3].portal.push_back({ "red", 2 });
+        room[3].portal.push_back({ "green", 0, true });
+        room[3].portal.push_back({ "blue", 1, true });
+        room[3].portal.push_back({ "red", 2, true });
 
     }
 
@@ -76,11 +76,49 @@
 
                 if (user.emotion[i] >= 100 || user.emotion[i] <=0) {
 
-                    room[user.current_loc].portal[]
+                    for (int j = 0; j < room[user.current_loc].portal.size(); j++) {
+
+                        if (room[user.current_loc].portal[j].name == "blue") {
+
+                            room[user.current_loc].portal[j].activ = false;
+
+                        }
+
+                    }
 
 
                 }
                 break;
+            }
+            
+            case 1: {
+
+                if (user.emotion[i] >= 100 || user.emotion[i] <= 0) {
+
+                    for (int j = 0; j < room[user.current_loc].portal.size(); j++) {
+
+                        if (room[user.current_loc].portal[j].name == "red") {
+
+                            room[user.current_loc].portal[j].activ = false;
+                            
+                        }
+
+                    }
+
+                }
+                break;
+            }
+
+            case 2: {
+                if (user.emotion[i] >= 100 || user.emotion[i] <= 0) {
+                    
+                    for (int j = 0; j < room[user.current_loc].portal.size(); j++) {
+                        if (room[user.current_loc].portal[j].name == "yellow") {
+                            room[user.current_loc].portal[j].activ = false;
+
+                        }
+                    }
+                }
             }
 
             default:
@@ -134,16 +172,16 @@
                             user.current_loc = room[user.current_loc].portal[i].target;
 
                         }
-                        else {
+                        /*else {
                             cout << "NO NAME ERROR\n";
                             break;
-                        }
+                        }*/
 
                     }
                     else {
 
                         cout << "You can't go. ERROR\n";
-
+                        break;
                     }
 
                 }
@@ -152,12 +190,18 @@
 
             }
 
-            if (chouse == "t") {
+            if (chouse == "s") {
 
                 user.emotion[0] = 100;
 
+            }
+
+            if (chouse == "r") {
+
+                user.emotion[1] = 100;
 
             }
+
 
         }
     }
