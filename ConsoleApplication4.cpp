@@ -13,7 +13,7 @@
 
         int current_loc = 0;
 
-        int emotion[3]{};
+        int emotion[6]{};
 
     };
 
@@ -32,105 +32,165 @@
 
     };
 
-    location_ room[4];
+    location_ room[6];
     player_ user;
 
     void InitGame() {
 
-        user.emotion[0] = {15};     // грусть
-        user.emotion[1] = { 5 };    // злость
-        user.emotion[2] = { 10 };    // сила
+        user.emotion[0] = { 50 };
+        user.emotion[1] = { 50 };
+        user.emotion[2] = { 50 };
+        user.emotion[3] = { 50 };   
+        user.emotion[4] = { 50 };    
+        user.emotion[5] = { 50 };
 
 
-        room[0].name = "calmness";
-        room[0].portal.push_back({"blue", 1, true});
+        room[0].name = "sadness";
+        room[0].portal.push_back({ "green", 0, true });
         room[0].portal.push_back({ "red", 2, true });
         room[0].portal.push_back({ "yellow", 3, true });
+        room[0].portal.push_back({ "pink", 4, true });
+        room[0].portal.push_back({ "brown", 5, true });
 
-        room[1].name = "sadness";
-        room[1].portal.push_back({"green", 0, true });
+        room[1].name = "calmness";
+        room[1].portal.push_back({ "blue", 1, true });
         room[1].portal.push_back({ "red", 2, true });
         room[1].portal.push_back({ "yellow", 3, true });
+        room[1].portal.push_back({ "pink", 4, true });
+        room[1].portal.push_back({ "brown", 5, true });
 
         room[2].name = "rage";
         room[2].portal.push_back({ "green", 0, true });
         room[2].portal.push_back({ "blue", 1, true });
         room[2].portal.push_back({ "yellow", 3, true });
+        room[2].portal.push_back({ "pink", 4, true });
+        room[2].portal.push_back({ "brown", 5, true });
 
         room[3].name = "power";
         room[3].portal.push_back({ "green", 0, true });
         room[3].portal.push_back({ "blue", 1, true });
         room[3].portal.push_back({ "red", 2, true });
+        room[3].portal.push_back({ "pink", 4, true });
+        room[3].portal.push_back({ "brown", 5, true });
 
+        room[4].name = "joy";
+        room[4].portal.push_back({ "blue", 1, true });
+        room[4].portal.push_back({ "red", 2, true });
+        room[4].portal.push_back({ "yellow", 3, true });
+        room[4].portal.push_back({ "green", 0, true });
+        room[4].portal.push_back({ "brown", 5, true });
+
+        room[5].name = "fear";
+        room[5].portal.push_back({ "blue", 1, true });
+        room[5].portal.push_back({ "red", 2, true });
+        room[5].portal.push_back({ "yellow", 3, true });
+        room[5].portal.push_back({ "green", 0, true });
+        room[5].portal.push_back({ "pink", 4, true });
     }
 
-    void scan_emotion() {
+        void scan_emotion(){
 
 
-        for (int i = 0; i < 3; i++) {
+            for (int i = 0; i < 6; i++) {
 
-            switch (i)
-            {
+                switch (i)
+                {
 
-            case 0: {
+                case 0: {
 
-                if (user.emotion[i] >= 100 || user.emotion[i] <=0) {
+                    if (user.emotion[i] >= 100 || user.emotion[i] <= 0) {
 
-                    for (int j = 0; j < room[user.current_loc].portal.size(); j++) {
+                        for (int j = 0; j < room[user.current_loc].portal.size(); j++) {
 
-                        if (room[user.current_loc].portal[j].name == "blue") {
+                            if (room[user.current_loc].portal[j].name == "blue") {
 
-                            room[user.current_loc].portal[j].activ = false;
+                                room[user.current_loc].portal[j].activ = false;
+
+                            }
+
+                        }
+
+
+                    }
+                    break;
+                }
+
+                case 1: {
+
+                    if (user.emotion[i] >= 100 || user.emotion[i] <= 0) {
+
+                        for (int j = 0; j < room[user.current_loc].portal.size(); j++) {
+
+                            if (room[user.current_loc].portal[j].name == "green") {
+
+                                room[user.current_loc].portal[j].activ = false;
+
+                            }
 
                         }
 
                     }
-
-
+                    break;
                 }
-                break;
-            }
-            
-            case 1: {
 
-                if (user.emotion[i] >= 100 || user.emotion[i] <= 0) {
+                case 2: {
+                    if (user.emotion[i] >= 100 || user.emotion[i] <= 0) {
 
-                    for (int j = 0; j < room[user.current_loc].portal.size(); j++) {
+                        for (int j = 0; j < room[user.current_loc].portal.size(); j++) {
+                            if (room[user.current_loc].portal[j].name == "red") {
+                                room[user.current_loc].portal[j].activ = false;
 
-                        if (room[user.current_loc].portal[j].name == "red") {
-
-                            room[user.current_loc].portal[j].activ = false;
-                            
-                        }
-
-                    }
-
-                }
-                break;
-            }
-
-            case 2: {
-                if (user.emotion[i] >= 100 || user.emotion[i] <= 0) {
-                    
-                    for (int j = 0; j < room[user.current_loc].portal.size(); j++) {
-                        if (room[user.current_loc].portal[j].name == "yellow") {
-                            room[user.current_loc].portal[j].activ = false;
-
+                            }
                         }
                     }
                 }
-            }
 
-            default:
-                break;
+
+                      break;
+
+                case 3: {
+                    if (user.emotion[i] >= 100 || user.emotion[i] <= 0) {
+
+                        for (int j = 0; j < room[user.current_loc].portal.size(); j++) {
+                            if (room[user.current_loc].portal[j].name == "yellow") {
+                                room[user.current_loc].portal[j].activ = false;
+
+                            }
+                        }
+                    }
+                }
+                      break;
+                case 4: {
+                    if (user.emotion[i] >= 100 || user.emotion[i] <= 0) {
+
+                        for (int j = 0; j < room[user.current_loc].portal.size(); j++) {
+                            if (room[user.current_loc].portal[j].name == "pink") {
+                                room[user.current_loc].portal[j].activ = false;
+
+                            }
+                        }
+                    }
+                }
+                      break;
+                case 5: {
+                    if (user.emotion[i] >= 100 || user.emotion[i] <= 0) {
+
+                        for (int j = 0; j < room[user.current_loc].portal.size(); j++) {
+                            if (room[user.current_loc].portal[j].name == "brown") {
+                                room[user.current_loc].portal[j].activ = false;
+
+                            }
+                        }
+                    }
+                }
+                      break;
+                }
             }
         }
+    
 
 
-    }
-
-
-    int main(){
+        int main(){
       
 
         InitGame();
@@ -196,12 +256,34 @@
 
             }
 
-            if (chouse == "r") {
+            if (chouse == "c") {
 
                 user.emotion[1] = 100;
 
             }
 
+            if (chouse == "r") {
 
+                user.emotion[2] = 100;
+
+            }
+            
+            if (chouse == "p") {
+
+                user.emotion[3] = 100;
+
+            }
+
+            if (chouse == "j") {
+
+                user.emotion[4] = 100;
+
+            }
+
+            if (chouse == "f") {
+
+                user.emotion[5] = 100;
+
+            }
         }
     }
