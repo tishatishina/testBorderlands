@@ -2,40 +2,47 @@
 #include <string>
 #include <windows.h>
 #include <vector>
+using namespace std;
+
+enum Worlds { SADNESS, CALM, POWER, RAGE, JOY, FEAR };
+
+Worlds currentWorld = Worlds::SADNESS;
+
+string worlds[] = { "Мир Грусти", "Мир Радости", "Мир Страха", "Мир Спокойствия", "Мир Гнева", "Мир Силы" };
+
+struct player_ {
+
+    int current_loc = 0;
+
+    int emotions[6]{};
+
+};
+
+struct portal_ {
+
+    string name;
+    int target;
+    bool activ;
+};
+
+struct location_ {
+    string name;
+    vector<portal_> portal;
 
 
-#include <emotions.h>
+};
+
+location_ room[6];
+player_ user;
+
+struct Character {
+    string name;
+    int effect[3][6]; // 3 реплики, 6 эмоций
+};
+
+#include "emotions.h"
 
 
-    using namespace std;
-
-  
-
-    struct player_ {
-
-        int current_loc = 0;
-
-        int emotion[6]{};
-
-    };
-
-
-    struct portal_ {
-
-        string name;
-        int target;
-        bool activ;
-    };
-
-    struct location_ {
-        string name;
-        vector<portal_> portal;
-
-
-    };
-
-    location_ room[6];
-    player_ user;
 
     void InitGame() {
 
@@ -95,29 +102,16 @@
 
             for (int i = 0; i < 6; i++) {
 
-                switch (i)
+                switch (currentWorld)
                 {
 
-                case 0: {
+                case Worlds::SADNESS: {
 
-                    if (user.emotion[i] >= 100 || user.emotion[i] <= 0) {
-
-                        for (int j = 0; j < room[user.current_loc].portal.size(); j++) {
-
-                            if (room[user.current_loc].portal[j].name == "blue") {
-
-                                room[user.current_loc].portal[j].activ = false;
-
-                            }
-
-                        }
-
-
-                    }
+                    swithLoc();
                     break;
                 }
 
-                case 1: {
+                case Worlds::CALM: {
 
                     if (user.emotion[i] >= 100 || user.emotion[i] <= 0) {
 
@@ -194,6 +188,9 @@
 
         int main(){
       
+            std::setlocale(LC_ALL, "Russian");
+            SetConsoleCP(1251);
+            SetConsoleOutputCP(1251);
 
         InitGame();
 
