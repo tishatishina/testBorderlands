@@ -4,6 +4,8 @@
 #include <vector>
 
 
+#include <emotions.h>
+
 
     using namespace std;
 
