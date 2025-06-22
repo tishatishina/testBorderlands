@@ -14,7 +14,7 @@ struct player_ {
 
     int current_loc = 0;
 
-    int emotions[6]{};
+    int emotions;
 
 };
 
