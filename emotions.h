@@ -6,16 +6,19 @@ using namespace std;
 
 void swithLoc() 
 {
-
+    struct Character {
+        string name;
+        int effect[3][6]; // 3 реплики, 6 эмоций
+    };
     // Названия эмоций и миров
     string emotionNames[6] = { "Грусть", "Радость", "Страх", "Спокойствие", "Гнев", "Сила" };
-    player_ emotions[6]{ 50,50,50,50,50,50 };
+    int emotions[6]{ 50,50,50,50,50,50 };
     
 
    
 
 
-    Character characters[3][6] = {
+    Character characters[3]= {
             {"Эла", {
                 {10, -5, 0, 0, 0, 0},   // Реплика 1: сильное влияние
                 {-15, 5, 0, 0, 0, 0},   // Реплика 2: ещё сильнее
@@ -59,11 +62,11 @@ void swithLoc()
 
             // Эмоции как переливающиеся сосуды:
             emotions[JOY] = 100 - emotions[SADNESS];
-            emotions[CALM] = 100 - emotions[ANGER];
+            emotions[CALM] = 100 - emotions[RAGE];
             emotions[POWER] = 100 - emotions[FEAR];
 
             bool extreme = true;
-            for (int i : {SADNESS, FEAR, ANGER}) {
+            for (int i : {SADNESS, FEAR, RAGE}) {
                 if (emotions[i] != 0 && emotions[i] != 100) {
                     extreme = false;
                     break;
@@ -78,7 +81,7 @@ void swithLoc()
             if (emotions[currentWorld] <= 0 || emotions[currentWorld] >= 100) {
                 for (int i = 0; i < 6; i++) {
                     if (i != currentWorld && emotions[i] > 0 && emotions[i] < 100) {
-                        currentWorld = i;
+                        currentWorld = Worlds::CALM;
                         cout << ">> Ты проиграл\n";
                         break;
                     }
@@ -94,7 +97,7 @@ void swithLoc()
             round++;
         }
 
-        return 0;
+        return;
     }
-}
+
 
