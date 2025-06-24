@@ -103,33 +103,33 @@ player_ user;
 
                case Worlds::SADNESS: 
 
-                   swithLoc();
+                   sadness();
                    break;
                
 
                case Worlds::CALM: 
 
-                   swithLoc();
+                   calm();
                    break;
                
 
                case  Worlds::POWER: 
 
-                   swithLoc();
+                   power();
                    break;
 
                case  Worlds::RAGE: 
 
-                   swithLoc();
+                   rage();
                    break;
                case  Worlds::JOY: 
 
-                   swithLoc();
+                   joy();
                
                                 break;
                case  Worlds::FEAR: 
 
-                   swithLoc();
+                   fear();
                    break;
                
           }
