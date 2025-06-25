@@ -2,22 +2,58 @@
 using namespace std;
 
 
+enum Worlds { SADNESS, CALM, POWER, RAGE, JOY, FEAR };
+
+Worlds currentWorld = Worlds::SADNESS;
+
+string worlds[] = { "Мир Грусти", "Мир Радости", "Мир Страха", "Мир Спокойствия", "Мир Гнева", "Мир Силы" };
+
+struct player_ {
+
+    int current_loc = 0;
+};
+
+struct portal_ {
+
+    string name;
+    int target;
+    bool activ;
+};
+
+struct location_ {
+    string name;
+    vector<portal_> portal;
+
+
+};
+
+location_ room[6];
+player_ user;
+
+
+
+struct Character {
+    string name;
+    int effect[3][6]; // 3 реплики, 6 эмоций
+};
+
+ string emotionNames[6] = { "Грусть", "Радость", "Страх", "Спокойствие", "Гнев", "Сила" };
+
+    int emotions[6]{ 50,50,50,50,50,50 };
+
+    void emotionScales()
+    {
+        emotions[JOY] = 100 - emotions[SADNESS];
+        emotions[CALM] = 100 - emotions[RAGE];
+        emotions[POWER] = 100 - emotions[FEAR];
+
+
+    };
+
 
 
 void sadness() 
 {
-    struct Character {
-        string name;
-        int effect[3][6]; // 3 реплики, 6 эмоций
-    };
-    // Названия эмоций и миров
-    string emotionNames[6] = { "Грусть", "Радость", "Страх", "Спокойствие", "Гнев", "Сила" };
-    int emotions[6]{ 50,50,50,50,50,50 };
-    
-
-   
-
-
     Character characters[3]= {
             {"Эла", {
                 {10, -5, 0, 0, 0, 0},   // Реплика 1: сильное влияние
@@ -61,9 +97,7 @@ void sadness()
             }
 
             // Эмоции как переливающиеся сосуды:
-            emotions[JOY] = 100 - emotions[SADNESS];
-            emotions[CALM] = 100 - emotions[RAGE];
-            emotions[POWER] = 100 - emotions[FEAR];
+            emotionScales();
 
             bool extreme = true;
             for (int i : {SADNESS, FEAR, RAGE}) {
@@ -102,18 +136,6 @@ void sadness()
 
 void calm()
 {
-    struct Character {
-        string name;
-        int effect[3][6]; // 3 реплики, 6 эмоций
-    };
-    // Названия эмоций и миров
-    string emotionNames[6] = { "Грусть", "Радость", "Страх", "Спокойствие", "Гнев", "Сила" };
-    int emotions[6]{ 50,50,50,50,50,50 };
-
-
-
-
-
     Character characters[3] = {
             {"Эла", {
                 {10, -5, 0, 0, 0, 0},   // Реплика 1: сильное влияние
@@ -156,10 +178,7 @@ void calm()
             if (emotions[i] < 0) emotions[i] = 0;
         }
 
-        // Эмоции как переливающиеся сосуды:
-        emotions[JOY] = 100 - emotions[SADNESS];
-        emotions[CALM] = 100 - emotions[RAGE];
-        emotions[POWER] = 100 - emotions[FEAR];
+        emotionScales();
 
         bool extreme = true;
         for (int i : {SADNESS, FEAR, RAGE}) {
@@ -198,18 +217,6 @@ void calm()
 
 void power()
 {
-    struct Character {
-        string name;
-        int effect[3][6]; // 3 реплики, 6 эмоций
-    };
-    // Названия эмоций и миров
-    string emotionNames[6] = { "Грусть", "Радость", "Страх", "Спокойствие", "Гнев", "Сила" };
-    int emotions[6]{ 50,50,50,50,50,50 };
-
-
-
-
-
     Character characters[3] = {
             {"Эла", {
                 {10, -5, 0, 0, 0, 0},   // Реплика 1: сильное влияние
@@ -252,10 +259,7 @@ void power()
             if (emotions[i] < 0) emotions[i] = 0;
         }
 
-        // Эмоции как переливающиеся сосуды:
-        emotions[JOY] = 100 - emotions[SADNESS];
-        emotions[CALM] = 100 - emotions[RAGE];
-        emotions[POWER] = 100 - emotions[FEAR];
+        emotionScales();
 
         bool extreme = true;
         for (int i : {SADNESS, FEAR, RAGE}) {
@@ -294,17 +298,6 @@ void power()
 
 void rage()
 {
-    struct Character {
-        string name;
-        int effect[3][6]; // 3 реплики, 6 эмоций
-    };
-    // Названия эмоций и миров
-    string emotionNames[6] = { "Грусть", "Радость", "Страх", "Спокойствие", "Гнев", "Сила" };
-    int emotions[6]{ 50,50,50,50,50,50 };
-
-
-
-
 
     Character characters[3] = {
             {"Эла", {
@@ -348,10 +341,7 @@ void rage()
             if (emotions[i] < 0) emotions[i] = 0;
         }
 
-        // Эмоции как переливающиеся сосуды:
-        emotions[JOY] = 100 - emotions[SADNESS];
-        emotions[CALM] = 100 - emotions[RAGE];
-        emotions[POWER] = 100 - emotions[FEAR];
+        emotionScales();
 
         bool extreme = true;
         for (int i : {SADNESS, FEAR, RAGE}) {
@@ -390,18 +380,6 @@ void rage()
 
 void joy()
 {
-    struct Character {
-        string name;
-        int effect[3][6]; // 3 реплики, 6 эмоций
-    };
-    // Названия эмоций и миров
-    string emotionNames[6] = { "Грусть", "Радость", "Страх", "Спокойствие", "Гнев", "Сила" };
-    int emotions[6]{ 50,50,50,50,50,50 };
-
-
-
-
-
     Character characters[3] = {
             {"Эла", {
                 {10, -5, 0, 0, 0, 0},   // Реплика 1: сильное влияние
@@ -444,10 +422,7 @@ void joy()
             if (emotions[i] < 0) emotions[i] = 0;
         }
 
-        // Эмоции как переливающиеся сосуды:
-        emotions[JOY] = 100 - emotions[SADNESS];
-        emotions[CALM] = 100 - emotions[RAGE];
-        emotions[POWER] = 100 - emotions[FEAR];
+        emotionScales();
 
         bool extreme = true;
         for (int i : {SADNESS, FEAR, RAGE}) {
@@ -486,18 +461,6 @@ void joy()
 
 void fear()
 {
-    struct Character {
-        string name;
-        int effect[3][6]; // 3 реплики, 6 эмоций
-    };
-    // Названия эмоций и миров
-    string emotionNames[6] = { "Грусть", "Радость", "Страх", "Спокойствие", "Гнев", "Сила" };
-    int emotions[6]{ 50,50,50,50,50,50 };
-
-
-
-
-
     Character characters[3] = {
             {"Эла", {
                 {10, -5, 0, 0, 0, 0},   // Реплика 1: сильное влияние
@@ -540,10 +503,7 @@ void fear()
             if (emotions[i] < 0) emotions[i] = 0;
         }
 
-        // Эмоции как переливающиеся сосуды:
-        emotions[JOY] = 100 - emotions[SADNESS];
-        emotions[CALM] = 100 - emotions[RAGE];
-        emotions[POWER] = 100 - emotions[FEAR];
+        emotionScales();
 
         bool extreme = true;
         for (int i : {SADNESS, FEAR, RAGE}) {

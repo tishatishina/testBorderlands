@@ -2,40 +2,12 @@
 #include <string>
 #include <windows.h>
 #include <vector>
-using namespace std;
-
-enum Worlds { SADNESS, CALM, POWER, RAGE, JOY, FEAR };
-
-Worlds currentWorld = Worlds::SADNESS;
-
-string worlds[] = { "Мир Грусти", "Мир Радости", "Мир Страха", "Мир Спокойствия", "Мир Гнева", "Мир Силы" };
-
-struct player_ {
-
-  int current_loc = 0;
-};
-
-struct portal_ {
-
-    string name;
-    int target;
-    bool activ;
-};
-
-struct location_ {
-    string name;
-    vector<portal_> portal;
-
-
-};
-
-location_ room[6];
-player_ user;
-
-
-
-
 #include "emotions.h"
+
+
+
+
+
 
 
 
@@ -151,11 +123,11 @@ player_ user;
     string chouse;
 
  
+        scan_emotion();
  
     while (true)
     {
 
-        scan_emotion();
 
         cout << "You in world :\t" << room[user.current_loc].name << endl;
 
